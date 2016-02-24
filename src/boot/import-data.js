@@ -47,6 +47,9 @@ export function load(callback){
                     db.close();
                     callback();
                 });
+            } else {
+                db.close();
+                callback();
             }
         });
     });
