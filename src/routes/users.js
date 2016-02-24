@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
-var userController = require('../controllers/userController.js');
+import express from 'express';
+import userController from  '../controllers/userController.js'
+
+let router = express.Router();
 
 /*
  * GET

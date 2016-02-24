@@ -1,24 +1,19 @@
 import express from 'express';
+import db from './services/db'
+import users  from './routes/users';
+const boot = require('./boot/import-data');
 
-var app = express();
+boot.load(function (err) {
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
+    if(err) throw err;
+
+    var app = express();
+
+    app.use(users);
+
+    app.listen(3000, function () {
+        console.log('Listening on port 3000!');
+    });
+
 });
 
-app.post('/', function (req, res) {
-    res.send('Hello World!');
-});
-
-app.delete('/', function (req, res) {
-    res.send('Hello World!');
-});
-
-app.put('/', function (req, res) {
-    res.send('Hello World!');
-});
-
-
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-});

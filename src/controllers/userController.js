@@ -1,4 +1,4 @@
-var userModel = require('../models/userModel.js');
+import Users from '../models/users';
 
 /**
  * userController.js
@@ -11,7 +11,7 @@ module.exports = {
      * userController.list()
      */
     list: function(req, res) {
-        userModel.find(function(err, users){
+        Users.find(function(err, users){
             if(err) {
                 return res.json(500, {
                     message: 'Error getting user.'
@@ -26,7 +26,7 @@ module.exports = {
      */
     show: function(req, res) {
         var id = req.params.id;
-        userModel.findOne({_id: id}, function(err, user){
+        Users.findOne({_id: id}, function(err, user){
             if(err) {
                 return res.json(500, {
                     message: 'Error getting user.'
@@ -45,7 +45,8 @@ module.exports = {
      * userController.create()
      */
     create: function(req, res) {
-        var user = new userModel({			email : req.body.email
+        var user = new Users({
+			email : req.body.email
         });
 
         user.save(function(err, user){
@@ -67,7 +68,7 @@ module.exports = {
      */
     update: function(req, res) {
         var id = req.params.id;
-        userModel.findOne({_id: id}, function(err, user){
+        Users.findOne({_id: id}, function(err, user){
             if(err) {
                 return res.json(500, {
                     message: 'Error saving user',
@@ -80,7 +81,8 @@ module.exports = {
                 });
             }
 
-            user.email =  req.body.email ? req.body.email : user.email;			
+            user.email =  req.body.email ? req.body.email : user.email;
+			
             user.save(function(err, user){
                 if(err) {
                     return res.json(500, {
@@ -102,7 +104,7 @@ module.exports = {
      */
     remove: function(req, res) {
         var id = req.params.id;
-        userModel.findByIdAndRemove(id, function(err, user){
+        Users.findByIdAndRemove(id, function(err, user){
             if(err) {
                 return res.json(500, {
                     message: 'Error getting user.'

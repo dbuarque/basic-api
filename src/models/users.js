@@ -1,7 +1,6 @@
-var mongoose = require('mongoose');
-var Schema   = mongoose.Schema;
+import mongoose from 'mongoose';
 
-var userSchema = new Schema({
+let userSchema = new mongoose.Schema({
 		"gender": String,
 		"name": {
 			"title": String,
@@ -33,4 +32,4 @@ var userSchema = new Schema({
 		}
 });
 
-module.exports = mongoose.model('user', userSchema);
+module.exports = mongoose.model('users', userSchema);
