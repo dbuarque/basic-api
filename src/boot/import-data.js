@@ -6,28 +6,31 @@ import Users from '../models/users';
 import { MongoClient } from 'mongodb';
 import assert from 'assert';
 
+// Count users
+let countData = function (db, callback) {
+    let collection = db.collection('users');
 
+    let dataCount = collection.count(function (err, count) {
+        assert.equal(err, null);
+        callback(err, count);
+    });
+};
+
+// Bulk insert
 let importData = function(db, callback){
     console.log("Importing Data...");
 
-    let json = require('./users.json');
-
-    // Bulk insert
     let collection = db.collection('users');
-
+    let json = require('./users.json');
     let data = json.results.map(item => item.user);
 
     collection.insertMany(data, function(err, result) {
-        if(err) {
-            throw 'Import Data Exception';
-            process.exit(1);
-        };
-
         assert.equal(err, null);
         callback(result);
     });
 };
 
+// Load the json
 export function load(callback){
 
     const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/basicapi';
@@ -35,11 +38,16 @@ export function load(callback){
     MongoClient.connect(MONGO_URL, function(err, db) {
         assert.equal(null, err);
 
-        importData(db, function (result) {
-            console.log('Imported Records: '+result.insertedCount);
-            db.close();
-            callback();
-        })
+        countData(db, function (_err, count) {
+            assert.equal(null, _err);
 
+            if(count === 0){
+                importData(db, function (result) {
+                    console.log('Imported Records: '+result.insertedCount);
+                    db.close();
+                    callback();
+                });
+            }
+        });
     });
 }

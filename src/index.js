@@ -1,10 +1,9 @@
 import express from 'express';
 import db from './services/db'
 import users  from './routes/users';
-const boot = require('./boot/import-data');
+import { load } from './boot/import-data';
 
-boot.load(function (err) {
-
+load(function (err) {
     if(err) throw err;
 
     var app = express();
