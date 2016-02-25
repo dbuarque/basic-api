@@ -9,13 +9,9 @@
   "scripts": {
     "clean": "rm -rf dist && rm -rf tmp",
     "webpack": "NODE_ENV=production webpack -p",
-    "deploy": "./bin/deploy.sh",
     "dev": "./node_modules/.bin/nodemon src/index.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0",
     "test": "mocha ./tests/* --compilers js:babel-register",
-    "prerelease": "git pull origin master && git commit -am 'release build'",
-    "release": "npm test && gulp github-release",
-    "postrelease": "git push origin master && git push --tags",
-    "lint": "eslint src"
+    "lint": "eslint src --ignore-path ./src/boot/import-data.js"
   },
   "repository": {
     "type": "git",
