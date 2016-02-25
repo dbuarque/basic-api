@@ -4,19 +4,20 @@ import compression from 'compression';
 import db from './services/db'
 import users  from './routes/users';
 import bodyParser from 'body-parser';
-import { load } from './boot/import-data';
+import { loadAsync } from './boot/import-data';
 
-load(function (err) {
+loadAsync(function (err) {
     if(err) throw err;
-
-    var app = express();
-
-    app.use(bodyParser.json());
-    app.use(users);
-
-    app.listen(3000, function () {
-        console.log('Listening on port 3000!');
-    });
-
+    console.log('Everything is loaded!')
 });
 
+var app = express();
+
+app.use(bodyParser.json());
+app.use(users);
+
+var server = app.listen(3000, function () {
+    console.log('Listening on port 3000!');
+});
+
+module.exports = server;

@@ -37,7 +37,7 @@ let createIndexes = function(db, callback){
 };
 
 // Load the json
-export function load(callback){
+export function loadAsync(callback){
 
     const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost/basicapi';
 
