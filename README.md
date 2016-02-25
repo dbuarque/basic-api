@@ -5,7 +5,7 @@
 * Webpack Build Ready
 * Babel & ES2015
 * Mongoose
-* Mongodb Driver for bulk import on startup
+* Bulk import on startup
 * Mocha for tests
 * ESlint
  
