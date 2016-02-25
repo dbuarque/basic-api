@@ -2,7 +2,6 @@
  * Created by dbuarque on 2/24/16.
  */
 import mongoose from 'mongoose';
-import Users from '../models/users';
 import { MongoClient } from 'mongodb';
 import assert from 'assert';
 
@@ -30,6 +29,13 @@ let importData = function(db, callback){
     });
 };
 
+let createIndexes = function(db, callback){
+    db.collection('users').createIndex({ "$**": "text" }, null, function(err, results) {
+            console.log(results);
+            callback();
+    });
+};
+
 // Load the json
 export function load(callback){
 
@@ -42,10 +48,13 @@ export function load(callback){
             assert.equal(null, _err);
 
             if(count === 0){
-                importData(db, function (result) {
-                    console.log('Imported Records: '+result.insertedCount);
-                    db.close();
-                    callback();
+                createIndexes(db, function () {
+                    console.log('Indexes Created!');
+                    importData(db, function (result) {
+                        console.log('Imported Records: '+result.insertedCount);
+                        db.close();
+                        callback();
+                    });
                 });
             } else {
                 db.close();

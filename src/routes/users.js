@@ -6,6 +6,13 @@ let router = express.Router();
 /*
  * GET
  */
+router.get('/users/search', function(req, res) {
+    userController.search(req, res);
+});
+
+/*
+ * GET
+ */
 router.get('/users', function(req, res) {
     userController.list(req, res);
 });
@@ -25,9 +32,9 @@ router.post('/users', function(req, res) {
 });
 
 /*
- * PUT
+ * POST
  */
-router.put('/users/:id', function(req, res) {
+router.post('/users/:id', function(req, res) {
     userController.update(req, res);
 });
 
@@ -37,5 +44,7 @@ router.put('/users/:id', function(req, res) {
 router.delete('/users/:id', function(req, res) {
     userController.remove(req, res);
 });
+
+
 
 module.exports = router;
