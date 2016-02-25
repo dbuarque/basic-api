@@ -7,37 +7,35 @@
 * Mongoose
 * Mongodb Driver for bulk import on startup
 * Mocha for tests
+ 
+## Install
+```
+npm install
+```
 
 ## Scripts
 
-### Start the project for development
+#### Start the project for development
 ```
 npm run dev
 ```
 
-### Run All tests
+#### Run All tests
 ```
 npm test
 ```
 
-### Run ESlint
+#### Run ESlint
 ```
 npm run lint
 ```
 
-### Remove dist and tmp
+#### Remove dist and tmp
 ```
 npm run clean
 ```
 
-### Build the API for production
+#### Build the API for production
 ```
 npm run webpack
 ```
-
-
-    "clean": "rm -rf dist && rm -rf tmp",
-    "webpack": "NODE_ENV=production webpack -p",
-    "dev": "./node_modules/.bin/nodemon src/index.js --exec ./node_modules/.bin/babel-node --presets es2015,stage-0",
-    "test": "mocha ./tests/* --compilers js:babel-register",
-    "lint": "eslint src --ignore-path ./src/boot/import-data.js"
