@@ -14,9 +14,10 @@ module.exports = {
         filename: 'index.js'
     },
     resolve: {
-        extensions: [ '', '.js', '.jsx', '.json', '.node' ]
+        extensions: [ '', '.js', '.json' ]
     },
     module: {
+        noParse: /node_modules\/json-schema\/lib\/validate\.js/,
         loaders: [
             {
                 test: /\.js$/,
@@ -25,6 +26,10 @@ module.exports = {
                 query: {
                     presets: ['es2015', 'stage-0']
                 }
+            },
+            {
+                test: /\.json$/,
+                loader: "json-loader"
             }
         ]
     },
