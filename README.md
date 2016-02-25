@@ -7,6 +7,7 @@
 * Mongoose
 * Mongodb Driver for bulk import on startup
 * Mocha for tests
+* ESlint
  
 ## Install
 ```
